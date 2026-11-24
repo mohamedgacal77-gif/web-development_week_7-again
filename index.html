@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SpendWise | Personal Budget & Expense Tracker</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- CSS file must be in the same folder as index.html -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="dashboard-layout">
+
+        <!-- Sidebar navigation -->
+        <aside class="sidebar">
+            <a class="brand" href="#dashboard">
+                <img src="money.png" alt="SpendWise money icon">
+                <span>SpendWise</span>
+            </a>
+
+            <nav class="navigation" aria-label="Main navigation">
+                <a class="nav-link active" href="#dashboard">Dashboard</a>
+                <a class="nav-link" href="#transactions">Transactions</a>
+                <a class="nav-link" href="#budgets">Budgets</a>
+                <a class="nav-link" href="#reports">Reports</a>
+                <a class="nav-link" href="#settings">Settings</a>
+            </nav>
+
+            <p class="sidebar-message">
+                Track smarter.<br>
+                Spend wisely.
+            </p>
+        </aside>
+
+        <!-- Main dashboard area -->
+        <main class="dashboard-main" id="dashboard">
+
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div>
+                    <p class="eyebrow">Personal finance</p>
+                    <h1>Personal Budget &amp; Expense Tracker</h1>
+                    <p class="header-description">
+                        An overview of your income, expenses, and monthly budget.
+                    </p>
+                </div>
+
+                <div class="user-area">
+                    <div class="user-details">
+                        <span>Welcome back,</span>
+                        <strong>Alex</strong>
+                    </div>
+                    <button class="profile-button" type="button">Profile</button>
+                </div>
+            </header>
+
+            <!-- Budget summary -->
+            <section id="summary" class="main-card">
+                <p class="eyebrow">Overview</p>
+                <h2>Budget Summary</h2>
+
+                <div class="summary-cards">
+
+                    <article class="summary-card income-card" tabindex="0">
+                        <div class="summary-icon">+</div>
+                        <div>
+                            <h3>Total Income</h3>
+                            <p id="total-income">KES 0.00</p>
+                            <span>This month</span>
+                        </div>
+                    </article>
+
+                    <article class="summary-card expense-card" tabindex="0">
+                        <div class="summary-icon">−</div>
+                        <div>
+                            <h3>Total Expenses</h3>
+                            <p id="total-expenses">KES 0.00</p>
+                            <span>This month</span>
+                        </div>
+                    </article>
+
+                    <article class="summary-card balance-card" tabindex="0">
+                        <div class="summary-icon">=</div>
+                        <div>
+                            <h3>Balance</h3>
+                            <p id="balance">KES 0.00</p>
+                            <span>Available to save</span>
+                        </div>
+                    </article>
+
+                </div>
+            </section>
+
+            <!-- Week 5: Interactive expense tracker -->
+            <section id="transactions" class="main-card">
+                <p class="eyebrow">Track your spending</p>
+                <h2>Add Monthly Income &amp; Expenses</h2>
+
+                <div class="interactive-grid">
+
+                    <form id="budget-form" class="interactive-form">
+                        <h3>Set Monthly Income</h3>
+
+                        <label for="income-input">Monthly income (KES)</label>
+                        <input
+                            id="income-input"
+                            type="number"
+                            min="1"
+                            step="0.01"
+                            placeholder="For example: 45000"
+                            required
+                        >
+
+                        <button type="submit" class="primary-button">
+                            Save Income
+                        </button>
+                    </form>
+
+                    <form id="expense-form" class="interactive-form">
+                        <h3>Add Expense</h3>
+
+                        <label for="expense-name">Expense name</label>
+                        <input
+                            id="expense-name"
+                            type="text"
+                            placeholder="For example: Groceries"
+                            required
+                        >
+
+                        <label for="expense-category">Category</label>
+                        <select id="expense-category" required>
+                            <option value="food">Food</option>
+                            <option value="transport">Transport</option>
+                            <option value="rent">Rent</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="savings">Savings</option>
+                            <option value="utilities">Utilities</option>
+                        </select>
+
+                        <label for="expense-amount">Amount (KES)</label>
+                        <input
+                            id="expense-amount"
+                            type="number"
+                            min="0.01"
+                            step="0.01"
+                            placeholder="For example: 500"
+                            required
+                        >
+
+                        <button type="submit" class="primary-button">
+                            Add Expense
+                        </button>
+                    </form>
+
+                </div>
+
+                <div class="budget-feedback">
+                    <p id="budget-status" class="budget-status">
+                        Enter your monthly income to begin.
+                    </p>
+                </div>
+
+                <div class="expense-records-header">
+                    <h3>Expense Records</h3>
+                    <button id="clear-expenses" class="danger-button" type="button">
+                        Clear All Expenses
+                    </button>
+                </div>
+
+                <p id="empty-expenses-message" class="empty-message">
+                    No expenses added yet. Use the form above to add your first expense.
+                </p>
+
+                <ul id="expense-list" class="expense-list"></ul>
+            </section>
+
+            <!-- Spending by category -->
+            <section id="budgets" class="main-card">
+                <p class="eyebrow">Monthly spending</p>
+                <h2>Spending by Category</h2>
+
+                <div class="category-grid">
+
+                    <article class="category-card" tabindex="0">
+                        <div class="category-icon">🍽</div>
+                        <h3>Food</h3>
+                        <p id="food-amount" class="category-amount">KES 0.00</p>
+                        <p class="category-detail">Food expenses this month</p>
+                    </article>
+
+                    <article class="category-card" tabindex="0">
+                        <div class="category-icon">🚗</div>
+                        <h3>Transport</h3>
+                        <p id="transport-amount" class="category-amount">KES 0.00</p>
+                        <p class="category-detail">Transport expenses this month</p>
+                    </article>
+
+                    <article class="category-card" tabindex="0">
+                        <div class="category-icon">🏠</div>
+                        <h3>Rent</h3>
+                        <p id="rent-amount" class="category-amount">KES 0.00</p>
+                        <p class="category-detail">Rent expenses this month</p>
+                    </article>
+
+                    <article class="category-card" tabindex="0">
+                        <div class="category-icon">🎬</div>
+                        <h3>Entertainment</h3>
+                        <p id="entertainment-amount" class="category-amount">KES 0.00</p>
+                        <p class="category-detail">Entertainment expenses this month</p>
+                    </article>
+
+                    <article class="category-card" tabindex="0">
+                        <div class="category-icon">💰</div>
+                        <h3>Savings</h3>
+                        <p id="savings-amount" class="category-amount">KES 0.00</p>
+                        <p class="category-detail">Money saved this month</p>
+                    </article>
+
+                    <article class="category-card" tabindex="0">
+                        <div class="category-icon">💡</div>
+                        <h3>Utilities</h3>
+                        <p id="utilities-amount" class="category-amount">KES 0.00</p>
+                        <p class="category-detail">Electricity, water, and internet</p>
+                    </article>
+
+                </div>
+            </section>
+
+            <!-- Budgeting tips -->
+            <section id="reports" class="main-card">
+                <p class="eyebrow">Learn and improve</p>
+                <h2>Budgeting Tips</h2>
+
+                <div class="video-container">
+                    <iframe
+                        src="https://www.youtube.com/embed/IIKr2915l2g"
+                        title="Budgeting tips video"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </section>
+
+            <!-- Instructions -->
+            <section id="settings" class="main-card">
+                <p class="eyebrow">Getting started</p>
+                <h2>How to Use This Tracker</h2>
+
+                <details>
+                    <summary>Click to show instructions</summary>
+
+                    <ol>
+                        <li>Enter your <strong>Monthly Income</strong> and click <strong>Save Income</strong>.</li>
+                        <li>Fill in the <strong>Expense Name</strong>, for example, “Groceries”.</li>
+                        <li>Enter the <strong>Amount</strong> you spent, for example, 500.</li>
+                        <li>Select a <strong>Category</strong>, such as Food or Transport.</li>
+                        <li>Click <strong>Add Expense</strong> to save the transaction.</li>
+                        <li>Check your budget summary, category cards, and expense records regularly.</li>
+                    </ol>
+
+                    <p class="notice">
+                        Tip: Recording expenses frequently makes it easier to manage your budget.
+                    </p>
+                </details>
+            </section>
+
+            <footer>
+                <p>&copy; 2026 SpendWise — Personal Budget &amp; Expense Tracker</p>
+            </footer>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
